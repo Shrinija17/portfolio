@@ -1189,6 +1189,98 @@
         /* Stat number tabular */
         .stat-number { font-variant-numeric: tabular-nums; }
 
+        /* Card hero image */
+        .card-image {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            margin: -28px -28px 20px;
+            overflow: hidden;
+            border-radius: 16px 16px 0 0;
+            background: linear-gradient(135deg, #e0e7ff, #fce7f3);
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+        }
+        .tilt-card:hover .card-image img { transform: scale(1.04); }
+        .card-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.04));
+            pointer-events: none;
+        }
+
+        /* Featured writing gallery */
+        .writing-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 56px;
+        }
+        .writing-card {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--border);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+        .writing-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+        }
+        .writing-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 45%, rgba(15, 23, 42, 0.85) 100%);
+            transition: opacity 0.4s ease;
+        }
+        .writing-card .writing-caption {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 16px;
+            z-index: 2;
+            color: #fff;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.35;
+            letter-spacing: -0.2px;
+        }
+        .writing-card .writing-tag {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #93c5fd;
+            margin-bottom: 6px;
+        }
+        .writing-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 18px 40px -20px rgba(37, 99, 235, 0.35);
+        }
+        .writing-card:hover img { transform: scale(1.06); }
+        @media (max-width: 768px) {
+            .writing-gallery { grid-template-columns: 1fr; }
+        }
+
     </style>
 </head>
 <body>
@@ -1324,8 +1416,11 @@
         <div class="project-grid">
             <div class="project-card reveal tilt-card">
                 <div class="spotlight"></div>
+                <div class="card-image">
+                    <img src="assets/screenshots/justpaid-homepage.png" alt="JustPaid homepage" loading="lazy">
+                </div>
                 <div class="project-icon">📣</div>
-                <h3>JustPaid LinkedIn — 0 → 2,858 followers, 335K monthly impressions</h3>
+                <h3>JustPaid LinkedIn — 0 → 3,059 followers, 335K monthly impressions</h3>
                 <p>Founding social hire at a YC W23 AI-native B2B startup. Hook library, carousel design system in Figma + Canva, founder-voice ghostwriting framework, daily reply ops. Every recent post on the company page is mine.</p>
                 <div class="tech-row">
                     <span class="chip">LinkedIn</span>
@@ -1333,11 +1428,14 @@
                     <span class="chip">Canva</span>
                     <span class="chip">Founder voice</span>
                 </div>
-                <p style="margin-top:14px;font-size:13px;"><a href="https://www.linkedin.com/company/justpaidio" target="_blank">→ See the work on LinkedIn</a></p>
+                <p style="margin-top:14px;font-size:13px;"><a href="https://www.linkedin.com/company/justpaid/" target="_blank">→ See the work on LinkedIn</a></p>
             </div>
 
             <div class="project-card reveal reveal-delay-1 tilt-card">
                 <div class="spotlight"></div>
+                <div class="card-image">
+                    <img src="assets/screenshots/justpaid-blog-hero.png" alt="JustPaid blog index" loading="lazy">
+                </div>
                 <div class="project-icon">✍️</div>
                 <h3>20 long-form B2B blogs in 4 months</h3>
                 <p>Engineered to rank on Google AND get cited by ChatGPT, Perplexity, and Claude when buyers research the category. The same hooks and narrative frames that make a thread go viral are what make an LLM cite you.</p>
@@ -1400,6 +1498,33 @@
                     <span class="chip">Claude</span>
                 </div>
             </div>
+        </div>
+
+        <p class="section-label reveal" style="margin-top:88px;">Featured writing</p>
+        <h2 class="section-title reveal" style="font-size:32px;">Selected blog posts I wrote at JustPaid</h2>
+
+        <div class="writing-gallery">
+            <a class="writing-card reveal" href="https://justpaid.ai/blog/agent-to-agent-billing-future" target="_blank">
+                <img src="assets/screenshots/justpaid-blog-agent-to-agent.png" alt="Agent-to-Agent Future of Billing" loading="lazy">
+                <div class="writing-caption">
+                    <span class="writing-tag">AI · Long-form</span>
+                    The Agent-to-Agent Future of Billing Is Already Here
+                </div>
+            </a>
+            <a class="writing-card reveal reveal-delay-1" href="https://justpaid.ai/blog/2026-cfo-ai-stack-what-finance-teams-are-buying" target="_blank">
+                <img src="assets/screenshots/justpaid-blog-cfo-stack.png" alt="2026 CFO AI Stack" loading="lazy">
+                <div class="writing-caption">
+                    <span class="writing-tag">Finance · Category piece</span>
+                    The 2026 CFO AI Stack: What Finance Teams Are Buying
+                </div>
+            </a>
+            <a class="writing-card reveal" href="https://justpaid.ai/blog/ai-accounts-receivable-automation" target="_blank">
+                <img src="assets/screenshots/justpaid-blog-ar-automation.png" alt="AI Accounts Receivable Automation" loading="lazy">
+                <div class="writing-caption">
+                    <span class="writing-tag">AI · Guide</span>
+                    AI Accounts Receivable Automation: Complete Guide for SaaS
+                </div>
+            </a>
         </div>
     </div>
 </section>
