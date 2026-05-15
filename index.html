@@ -1031,6 +1031,164 @@
             .walle-head { animation: none !important; }
             .walle-tread::after { animation: none !important; }
         }
+
+        /* === CREATIVE / INTERACTIVE LAYER === */
+
+        /* Aurora background behind hero */
+        .hero { overflow: hidden; isolation: isolate; }
+
+        .aurora {
+            position: absolute;
+            inset: -20%;
+            z-index: -2;
+            filter: blur(80px) saturate(140%);
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        .aurora::before, .aurora::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+        }
+        .aurora::before {
+            width: 60%; height: 60%;
+            top: -10%; left: -10%;
+            background: radial-gradient(circle, #93c5fd 0%, transparent 60%);
+            animation: aurora-drift-a 18s ease-in-out infinite alternate;
+        }
+        .aurora::after {
+            width: 55%; height: 55%;
+            bottom: -10%; right: -10%;
+            background: radial-gradient(circle, #fda4af 0%, transparent 60%);
+            animation: aurora-drift-b 22s ease-in-out infinite alternate;
+        }
+        .aurora-c {
+            position: absolute;
+            width: 45%; height: 45%;
+            top: 30%; left: 40%;
+            background: radial-gradient(circle, #c4b5fd 0%, transparent 60%);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: blur(80px);
+            z-index: -2;
+            pointer-events: none;
+            animation: aurora-drift-c 26s ease-in-out infinite alternate;
+        }
+        @keyframes aurora-drift-a {
+            0%   { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20%, 15%) scale(1.2); }
+        }
+        @keyframes aurora-drift-b {
+            0%   { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-15%, -10%) scale(1.15); }
+        }
+        @keyframes aurora-drift-c {
+            0%   { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-20%, 10%) scale(1.25); }
+        }
+
+        /* Subtle grain overlay */
+        .grain {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.06;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+        }
+
+        /* Word-by-word headline reveal */
+        .hero h1 .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(28px);
+            animation: word-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes word-rise {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Marquee gradient edges */
+        .tools-section { position: relative; }
+        .tools-section::before, .tools-section::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .tools-section::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg), transparent);
+        }
+        .tools-section::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg), transparent);
+        }
+
+        /* Custom cursor */
+        @media (hover: hover) and (pointer: fine) {
+            body.has-custom-cursor, body.has-custom-cursor * { cursor: none !important; }
+            .cursor-dot, .cursor-ring {
+                position: fixed;
+                top: 0; left: 0;
+                pointer-events: none;
+                z-index: 9999;
+                border-radius: 50%;
+                will-change: transform;
+            }
+            .cursor-dot {
+                width: 6px; height: 6px;
+                background: var(--accent);
+                transform: translate(-50%, -50%);
+                transition: width 0.2s, height 0.2s, background 0.2s;
+            }
+            .cursor-ring {
+                width: 36px; height: 36px;
+                border: 1.5px solid var(--accent);
+                transform: translate(-50%, -50%);
+                transition: width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+                opacity: 0.7;
+            }
+            body.cursor-hover .cursor-dot {
+                width: 12px; height: 12px;
+            }
+            body.cursor-hover .cursor-ring {
+                width: 56px; height: 56px;
+                background: rgba(37, 99, 235, 0.08);
+                border-color: var(--accent);
+                opacity: 1;
+            }
+        }
+
+        /* 3D tilt + spotlight on creative cards */
+        #creative .project-card {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+            overflow: hidden;
+        }
+        #creative .project-card .spotlight {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(37, 99, 235, 0.12), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 0;
+        }
+        #creative .project-card:hover .spotlight { opacity: 1; }
+        #creative .project-card > *:not(.spotlight) { position: relative; z-index: 1; }
+
+        /* Magnetic CTAs */
+        .btn { will-change: transform; }
+
+        /* Stat number tabular */
+        .stat-number { font-variant-numeric: tabular-nums; }
+
     </style>
 </head>
 <body>
@@ -1051,15 +1209,29 @@
 
 <!-- HERO -->
 <header class="hero">
+    <div class="aurora"></div>
+    <div class="aurora-c"></div>
+    <div class="grain"></div>
     <div class="container">
         <div class="hero-content">
             <div class="badge reveal">
                 <span class="pulse"></span>
                 Open to opportunities
             </div>
-            <h1 class="reveal reveal-delay-1">
-                I concept the campaign,<br>
-                write the post, and <span class="accent-text">ship from the brand account</span>
+            <h1 id="hero-headline">
+                <span class="word" style="animation-delay:0.05s">I</span>
+                <span class="word" style="animation-delay:0.12s">concept</span>
+                <span class="word" style="animation-delay:0.19s">the</span>
+                <span class="word" style="animation-delay:0.26s">campaign,</span><br>
+                <span class="word" style="animation-delay:0.36s">write</span>
+                <span class="word" style="animation-delay:0.43s">the</span>
+                <span class="word" style="animation-delay:0.50s">post,</span>
+                <span class="word" style="animation-delay:0.57s">and</span>
+                <span class="word accent-text" style="animation-delay:0.68s">ship</span>
+                <span class="word accent-text" style="animation-delay:0.75s">from</span>
+                <span class="word accent-text" style="animation-delay:0.82s">the</span>
+                <span class="word accent-text" style="animation-delay:0.89s">brand</span>
+                <span class="word accent-text" style="animation-delay:0.96s">account</span>
             </h1>
             <p class="tagline reveal reveal-delay-2">
                 Creative strategist and founding AI growth hire at <strong>JustPaid</strong> (YC W23). I run social end-to-end — write the threads, produce the short-form, edit in CapCut, ship from the brand account, and reply to the comments at 9pm. Plus the dashboards, MCP servers, and AI tooling behind it.
@@ -1086,19 +1258,19 @@
 <div class="container">
     <div class="stats-bar reveal">
         <div class="stat">
-            <div class="stat-number">335K</div>
+            <div class="stat-number" data-count-to="335" data-suffix="K">0K</div>
             <div class="stat-label">Peak Monthly LinkedIn Impressions</div>
         </div>
         <div class="stat">
-            <div class="stat-number">+250%</div>
+            <div class="stat-number" data-count-to="250" data-prefix="+" data-suffix="%">+0%</div>
             <div class="stat-label">Follower Growth (avg, 4 channels)</div>
         </div>
         <div class="stat">
-            <div class="stat-number">20</div>
+            <div class="stat-number" data-count-to="20">0</div>
             <div class="stat-label">Long-form Blogs in 4 Months</div>
         </div>
         <div class="stat">
-            <div class="stat-number">2</div>
+            <div class="stat-number" data-count-to="2">0</div>
             <div class="stat-label">Hackathon Launches Shipped</div>
         </div>
     </div>
@@ -1150,7 +1322,8 @@
         <h2 class="section-title reveal">Campaigns, content, and launches I've shipped</h2>
 
         <div class="project-grid">
-            <div class="project-card reveal">
+            <div class="project-card reveal tilt-card">
+                <div class="spotlight"></div>
                 <div class="project-icon">📣</div>
                 <h3>JustPaid LinkedIn — 0 → 2,858 followers, 335K monthly impressions</h3>
                 <p>Founding social hire at a YC W23 AI-native B2B startup. Hook library, carousel design system in Figma + Canva, founder-voice ghostwriting framework, daily reply ops. Every recent post on the company page is mine.</p>
@@ -1163,7 +1336,8 @@
                 <p style="margin-top:14px;font-size:13px;"><a href="https://www.linkedin.com/company/justpaidio" target="_blank">→ See the work on LinkedIn</a></p>
             </div>
 
-            <div class="project-card reveal reveal-delay-1">
+            <div class="project-card reveal reveal-delay-1 tilt-card">
+                <div class="spotlight"></div>
                 <div class="project-icon">✍️</div>
                 <h3>20 long-form B2B blogs in 4 months</h3>
                 <p>Engineered to rank on Google AND get cited by ChatGPT, Perplexity, and Claude when buyers research the category. The same hooks and narrative frames that make a thread go viral are what make an LLM cite you.</p>
@@ -1176,7 +1350,8 @@
                 <p style="margin-top:14px;font-size:13px;"><a href="https://justpaid.ai/blog" target="_blank">→ Read on justpaid.ai/blog</a></p>
             </div>
 
-            <div class="project-card reveal">
+            <div class="project-card reveal tilt-card">
+                <div class="spotlight"></div>
                 <div class="project-icon">🎬</div>
                 <h3>Ava — Desktop AI Companion (Gemini Live, $80K)</h3>
                 <p>Concepted, named, and shipped: multimodal desktop AI agent with voice + vision + text. Shot and edited the launch trailer, wrote the launch thread, ran the campaign across LinkedIn and X. $80K Google Gemini Live Agent Challenge.</p>
@@ -1188,7 +1363,8 @@
                 </div>
             </div>
 
-            <div class="project-card reveal reveal-delay-1">
+            <div class="project-card reveal reveal-delay-1 tilt-card">
+                <div class="spotlight"></div>
                 <div class="project-icon">🛡️</div>
                 <h3>ShipSafe — GitLab Duo Agent Hackathon ($65K)</h3>
                 <p>Second 2025 hackathon launch. Same play: concept → product → trailer → launch. Developer-facing positioning, video edit, launch posts, all me.</p>
@@ -1199,7 +1375,8 @@
                 </div>
             </div>
 
-            <div class="project-card reveal">
+            <div class="project-card reveal tilt-card">
+                <div class="spotlight"></div>
                 <div class="project-icon">🤖</div>
                 <h3>AI Creative & Repurposing Agent</h3>
                 <p>Multi-step Claude agent turning one long-form asset (blog, podcast, founder talk) into 4-5 distribution units — X threads, LinkedIn carousels, TikTok scripts, short-form video cuts, landing page copy. Powers JustPaid's content cadence.</p>
@@ -1211,7 +1388,8 @@
                 </div>
             </div>
 
-            <div class="project-card reveal reveal-delay-1">
+            <div class="project-card reveal reveal-delay-1 tilt-card">
+                <div class="spotlight"></div>
                 <div class="project-icon">🛰️</div>
                 <h3>Competitive Intel MCP Server</h3>
                 <p>Custom Model Context Protocol server scraping competitor creative and engagement on a daily schedule. Feeds positioning and creative ideas into the content pipeline. Built because no off-the-shelf tool surfaced what I needed.</p>
@@ -1695,6 +1873,129 @@
         setPos(60);
         setTimeout(doSomething, 2000);
     })();
+</script>
+
+<!-- CREATIVE / INTERACTIVE LAYER -->
+<script>
+(function() {
+    'use strict';
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isHoverDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    /* ─── Custom cursor ─── */
+    if (isHoverDevice && !reduceMotion) {
+        document.body.classList.add('has-custom-cursor');
+        const dot = document.createElement('div');
+        const ring = document.createElement('div');
+        dot.className = 'cursor-dot';
+        ring.className = 'cursor-ring';
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+
+        let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+        let rx = mx, ry = my;
+        document.addEventListener('mousemove', (e) => {
+            mx = e.clientX; my = e.clientY;
+            dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+        });
+        document.addEventListener('mouseleave', () => {
+            dot.style.opacity = '0';
+            ring.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+            dot.style.opacity = '1';
+            ring.style.opacity = '0.7';
+        });
+
+        (function loop() {
+            rx += (mx - rx) * 0.18;
+            ry += (my - ry) * 0.18;
+            ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+            requestAnimationFrame(loop);
+        })();
+
+        const hoverables = 'a, button, .btn, .project-card, .chip, .stat, .tool-item, [role="button"]';
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest(hoverables)) document.body.classList.add('cursor-hover');
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest(hoverables)) document.body.classList.remove('cursor-hover');
+        });
+    }
+
+    /* ─── Count-up animation on stats ─── */
+    const countEls = document.querySelectorAll('[data-count-to]');
+    const animateCount = (el) => {
+        const target = parseFloat(el.dataset.countTo);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        const ease = (t) => 1 - Math.pow(1 - t, 3);
+        const step = (now) => {
+            const t = Math.min(1, (now - start) / duration);
+            const val = Math.round(target * ease(t));
+            el.textContent = prefix + val + suffix;
+            if (t < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    };
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateCount(entry.target);
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        countEls.forEach((el) => io.observe(el));
+    } else {
+        countEls.forEach((el) => {
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            el.textContent = prefix + el.dataset.countTo + suffix;
+        });
+    }
+
+    /* ─── 3D tilt + spotlight on creative cards ─── */
+    if (isHoverDevice && !reduceMotion) {
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach((card) => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const cx = rect.width / 2;
+                const cy = rect.height / 2;
+                const rotY = ((x - cx) / cx) * 4;
+                const rotX = -((y - cy) / cy) * 4;
+                card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`;
+                card.style.setProperty('--mx', x + 'px');
+                card.style.setProperty('--my', y + 'px');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    }
+
+    /* ─── Magnetic CTAs ─── */
+    if (isHoverDevice && !reduceMotion) {
+        const magnets = document.querySelectorAll('.btn');
+        magnets.forEach((btn) => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+    }
+})();
 </script>
 
 </body>
