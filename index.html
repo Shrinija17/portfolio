@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shrinija Kummari — Creative Strategist & AI Growth Operator</title>
-    <meta name="description" content="Creative strategist and AI growth operator. Founding growth and creative hire at JustPaid (YC W23). 0→2,858 LinkedIn followers, 335K peak monthly impressions, 20 long-form blogs, 2 hackathon launches — solo.">
+    <title>Shrinija Kummari — Creative Strategist, AI CMO Operator</title>
+    <meta name="description" content="Creative strategist who built her own AI CMO. 9-agent marketing OS in Next.js + Gemini. Founding growth and creative hire at JustPaid (YC W23). 0→3,059 LinkedIn followers, 335K peak monthly impressions, 20 long-form blogs, 2 hackathon launches — solo.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1215,6 +1215,217 @@
             pointer-events: none;
         }
 
+        /* AI CMO section */
+        .ai-cmo {
+            position: relative;
+            padding: 120px 0 100px;
+            background: linear-gradient(180deg, #fafafa 0%, #f4f4f7 100%);
+            overflow: hidden;
+        }
+        .ai-cmo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 18% 22%, rgba(147, 197, 253, 0.35), transparent 38%),
+                radial-gradient(circle at 82% 78%, rgba(196, 181, 253, 0.30), transparent 42%);
+            pointer-events: none;
+        }
+        .ai-cmo .container { position: relative; }
+
+        .cmo-hero {
+            display: grid;
+            grid-template-columns: 1.05fr 1.25fr;
+            gap: 48px;
+            align-items: center;
+            margin-top: 32px;
+        }
+        @media (max-width: 960px) {
+            .cmo-hero { grid-template-columns: 1fr; gap: 32px; }
+        }
+
+        .cmo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-heading);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.25);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+        .cmo-badge .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+        }
+
+        .cmo-title {
+            font-family: var(--font-heading);
+            font-size: clamp(34px, 4vw, 52px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .cmo-title em {
+            font-style: normal;
+            background: linear-gradient(95deg, #2563EB 0%, #7C3AED 50%, #DB2777 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cmo-tagline {
+            font-size: 17px;
+            color: var(--secondary);
+            line-height: 1.65;
+            margin-bottom: 28px;
+            max-width: 540px;
+        }
+        .cmo-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        .cmo-meta .chip {
+            background: #fff;
+            border: 1px solid var(--border);
+        }
+        .cmo-numbers {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 32px;
+            margin-top: 8px;
+        }
+        .cmo-numbers .num {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+            color: var(--fg);
+            line-height: 1.1;
+        }
+        .cmo-numbers .lbl {
+            font-size: 12px;
+            color: var(--muted-fg);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .cmo-screen {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow:
+                0 30px 60px -25px rgba(15, 23, 42, 0.35),
+                0 12px 30px -15px rgba(37, 99, 235, 0.25);
+            transform: perspective(1400px) rotateY(-3deg) rotateX(2deg);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #0f172a;
+        }
+        .cmo-screen:hover { transform: perspective(1400px) rotateY(0) rotateX(0); }
+        .cmo-screen img { width: 100%; display: block; }
+        .cmo-screen .chrome {
+            display: flex;
+            gap: 6px;
+            padding: 10px 14px;
+            background: #1e293b;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .cmo-screen .chrome span {
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            display: block;
+        }
+        .cmo-screen .chrome span:nth-child(1) { background: #f87171; }
+        .cmo-screen .chrome span:nth-child(2) { background: #fbbf24; }
+        .cmo-screen .chrome span:nth-child(3) { background: #34d399; }
+
+        /* Agent grid */
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 72px;
+        }
+        @media (max-width: 960px) { .agent-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .agent-grid { grid-template-columns: 1fr; } }
+
+        .agent-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #7C3AED);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .agent-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(37, 99, 235, 0.4);
+            box-shadow: 0 18px 40px -22px rgba(37, 99, 235, 0.35);
+        }
+        .agent-card:hover::before { transform: scaleX(1); }
+        .agent-num {
+            font-family: var(--font-heading);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted-fg);
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+        }
+        .agent-name {
+            font-family: var(--font-heading);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--fg);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .agent-desc {
+            font-size: 13.5px;
+            color: var(--secondary);
+            line-height: 1.55;
+        }
+
+        /* Marketing AI skill chips */
+        .skill-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+        .skill-cloud .chip {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            font-weight: 500;
+        }
+        .skill-cloud .chip strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
         /* Featured writing gallery */
         .writing-gallery {
             display: grid;
@@ -1291,6 +1502,7 @@
         <a href="#" class="logo">Shrinija.</a>
         <div class="nav-links">
             <a href="#creative">Creative work</a>
+            <a href="#ai-cmo">AI CMO</a>
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
@@ -1326,7 +1538,7 @@
                 <span class="word accent-text" style="animation-delay:0.96s">account</span>
             </h1>
             <p class="tagline reveal reveal-delay-2">
-                Creative strategist and founding AI growth hire at <strong>JustPaid</strong> (YC W23). I run social end-to-end — write the threads, produce the short-form, edit in CapCut, ship from the brand account, and reply to the comments at 9pm. Plus the dashboards, MCP servers, and AI tooling behind it.
+                Creative strategist and founding AI growth hire at <strong>JustPaid</strong> (YC W23). I run social end-to-end — write the threads, produce the short-form, edit in CapCut, ship from the brand account, and reply to the comments at 9pm. Plus I built my own <a href="#ai-cmo" style="color:var(--accent);font-weight:600;">9-agent AI CMO</a> to do the work of a marketing team.
             </p>
             <div class="cta-group reveal reveal-delay-3">
                 <a href="mailto:shrinijakummari1997@gmail.com" class="btn btn-primary">
@@ -1525,6 +1737,129 @@
                     AI Accounts Receivable Automation: Complete Guide for SaaS
                 </div>
             </a>
+        </div>
+    </div>
+</section>
+
+<!-- AI CMO -->
+<section id="ai-cmo" class="ai-cmo">
+    <div class="container">
+        <p class="section-label reveal">AI CMO</p>
+        <h2 class="section-title reveal">The marketing OS I built for myself</h2>
+
+        <div class="cmo-hero">
+            <div class="reveal">
+                <span class="cmo-badge"><span class="dot"></span> Personal AI CMO · Multi-agent</span>
+                <h3 class="cmo-title">A <em>9-agent AI CMO</em> I run daily<br>to do the work of a marketing team.</h3>
+                <p class="cmo-tagline">
+                    A multi-agent marketing operating system I built and use personally — to listen on HN and Reddit, watch competitors, draft long-form posts, repurpose blogs into LinkedIn / X / Reels, run GEO checks against ChatGPT and Perplexity, and ship visual content (carousels, quote cards, 15s vertical MP4s). Same stack pattern I use to run JustPaid social: I don't wait for tools — I build them.
+                </p>
+                <div class="cmo-meta">
+                    <span class="chip">Next.js 16</span>
+                    <span class="chip">Gemini 2.5 Flash + Pro</span>
+                    <span class="chip">SQLite</span>
+                    <span class="chip">Tailwind v4</span>
+                    <span class="chip">ffmpeg</span>
+                    <span class="chip">resvg-js</span>
+                </div>
+                <div class="cmo-numbers">
+                    <div>
+                        <div class="num">9</div>
+                        <div class="lbl">AI agents</div>
+                    </div>
+                    <div>
+                        <div class="num">~$0/mo</div>
+                        <div class="lbl">infra cost</div>
+                    </div>
+                    <div>
+                        <div class="num">1</div>
+                        <div class="lbl">operator (me)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal reveal-delay-1">
+                <div class="cmo-screen">
+                    <div class="chrome"><span></span><span></span><span></span></div>
+                    <img src="assets/screenshots/ai-cmo-dashboard.png" alt="AI CMO dashboard — 9 agents with run-now controls and live drafts" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <div class="agent-grid">
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 01</div>
+                <div class="agent-name">📡 HN Listener</div>
+                <p class="agent-desc">Watches Hacker News for threads on RAG, vector search, and AI infra. Drafts engineer-voice replies that link back to my POV without sounding like marketing.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 02</div>
+                <div class="agent-name">👀 Reddit Listener</div>
+                <p class="agent-desc">Monitors r/ML, r/LocalLLaMA, r/dataengineering and friends. Surfaces high-intent questions and drafts native-tone replies.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 03</div>
+                <div class="agent-name">🔁 Blog Repurposer</div>
+                <p class="agent-desc">Turns every long-form blog into a LinkedIn post, X thread, Reddit post, YouTube Short script, and newsletter — voice-locked, ready to ship.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 04</div>
+                <div class="agent-name">🎯 Competitor Watch</div>
+                <p class="agent-desc">Tracks Pinecone, Weaviate, Algolia, Vespa, Qdrant — and any list of competitors I point at it. Surfaces moves and drafts response posts.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 05</div>
+                <div class="agent-name">🔎 SEO Agent</div>
+                <p class="agent-desc">Generates "X-vs-Y" comparison MDX pages at scale, structured for traditional Google ranking. Programmatic SEO without a copy farm.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 06</div>
+                <div class="agent-name">🤖 GEO Agent</div>
+                <p class="agent-desc">Queries Gemini, ChatGPT, Perplexity, and Claude with branded prompts. Detects mentions, flags gaps, and suggests content fixes to win the LLM citation layer.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 07</div>
+                <div class="agent-name">📣 Daily Social</div>
+                <p class="agent-desc">3 LinkedIn variants + 5 X variants every day, tuned to recent customer interviews and trending hooks. I pick the winner, ship it from the brand account.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 08</div>
+                <div class="agent-name">✍️ Writer Agent</div>
+                <p class="agent-desc">Long-form blog post drafts in a voice I've locked in. Outputs 80%-ready posts I edit and ship — not generic AI content.</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-num">AGENT 09</div>
+                <div class="agent-name">🎬 Visual Content</div>
+                <p class="agent-desc">Quote cards, LinkedIn carousels, and 15-second vertical MP4s rendered via resvg + ffmpeg — auto-styled in brand. Ships the asset, not just the brief.</p>
+            </div>
+        </div>
+
+        <p class="section-label reveal" style="margin-top:96px;">Marketing AI skills</p>
+        <h2 class="section-title reveal" style="font-size:32px;">What I actually do with AI all day</h2>
+
+        <div class="skill-cloud">
+            <span class="chip"><strong>Claude Code</strong> (primary work surface)</span>
+            <span class="chip"><strong>Cursor</strong> for app + agent dev</span>
+            <span class="chip"><strong>Claude API + Gemini + GPT</strong> orchestration</span>
+            <span class="chip"><strong>Custom MCP servers</strong> (Python + Playwright)</span>
+            <span class="chip"><strong>LangChain + RAG</strong> pipelines</span>
+            <span class="chip"><strong>Agent evals</strong> against ChatGPT / Perplexity / Claude rec systems</span>
+            <span class="chip"><strong>AEO / GEO</strong> — Generative Engine Optimization</span>
+            <span class="chip"><strong>Voice-locked drafting</strong> (custom Claude Code skills)</span>
+            <span class="chip"><strong>Content repurposing pipelines</strong> (1 → 5)</span>
+            <span class="chip"><strong>Playwright + AI scrapers</strong> for competitive intel</span>
+            <span class="chip"><strong>Prompt engineering</strong> + evals as a habit</span>
+            <span class="chip"><strong>Attribution warehouses</strong> on BigQuery</span>
+            <span class="chip"><strong>Programmatic SEO</strong> at scale</span>
+            <span class="chip"><strong>AI-generated visual assets</strong> (carousels, quote cards, 15s MP4s)</span>
+            <span class="chip"><strong>SQLite-backed agent state</strong> (long-running ops)</span>
+            <span class="chip"><strong>Next.js 16 + Tailwind v4</strong> for tooling UIs</span>
+            <span class="chip"><strong>Agent-based competitive watch</strong></span>
+            <span class="chip"><strong>Daily AI workflow</strong> — not a future skill</span>
+        </div>
+
+        <div class="cmo-screen reveal" style="margin-top:80px; max-width: 1000px;">
+            <div class="chrome"><span></span><span></span><span></span></div>
+            <img src="assets/screenshots/ai-cmo-playbook.png" alt="AI CMO playbook view" loading="lazy">
         </div>
     </div>
 </section>
